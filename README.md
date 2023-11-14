@@ -1,4 +1,4 @@
-# Querying-a-Digital-Music-Store-Database
+# ⭐ Querying-a-Digital-Music-Store-Database ⭐
 
 ## Table of Contents
 - [Overview](https://github.com/Ratafar22/Querying-a-Digital-Music-Store-Database#overview)
