@@ -21,7 +21,7 @@ ORDER BY 1 DESC;
 | Johnson Steve	 |18
 
 ### Insight:
-There are three Sales support Reps managing the customers with Peacock Jane having the highest customers of 21 and Johnson Steve with 18 total customers.
+- There are three Sales support Reps managing the customers with Peacock Jane having the highest customers of 21 and Johnson Steve with 18 total customers.
 
 ## 2. Who are our top Customers according to Invoices?
 ```sql  
