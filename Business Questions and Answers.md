@@ -8,7 +8,7 @@
 ```sql
 SELECT e.LastName || ' ' || e.FirstName AS Employee, COUNT(c.customerid) AS Total_Customer
 FROM Employee e
-JOIN Customer c
+INNER JOIN Customer c
 ON e.EmployeeId = c.SupportRepId
 GROUP BY 1
 ORDER BY 1 DESC;
@@ -23,7 +23,6 @@ ORDER BY 1 DESC;
 
 ### Insight:
 - There are three Sales support Reps managing the customers with Peacock Jane having the highest customers of 21 and Johnson Steve with 18 total customers.
-
 #
 
 ### 2. Who are our top Customers according to Invoices?
@@ -52,24 +51,50 @@ Hugh O'Reilly	|45.62
 
 ### Insight: 
 - Helena Holy, Richard Cunningham, Luis Rojas, Ladislav Kovacs, and Hugh O’Reilly are the top five customers who have spent the highest amount of money according to the invoice.
+#
 
-## 3. Who are the Rock Music Listeners? We want to know all Rock Music listeners' email, first names, last names, and Genres
+### 3. Who are the Rock Music Listeners? We want to know all Rock Music listeners' email, first names, last names, and Genres
+### Solution:
+- Select the email, first and last names of the customers, and the Genre and filter the Genre to Rock music.
+  
 ```sql
 SELECT C.Email, C.FirstName, C.LastName, G.Name AS Genre
 FROM Customer C
-JOIN Invoice I
+INNER JOIN Invoice I
 ON I.CustomerId = C.CustomerId
-JOIN InvoiceLine Il
+INNER JOIN InvoiceLine Il
 ON Il.InvoiceId = I.InvoiceId
-JOIN Track T
+INNER JOIN Track T
 ON T.TrackId = Il.TrackId
-JOIN Genre G
+INNER JOIN Genre G
 ON G.GenreId = T.GenreId
 WHERE Genre = 'Rock'
 GROUP BY 1,2,3,4
 ORDER BY 1;
 ```
-## 4. Who is writing the rock music?
+### Output:
+|Email			|FirstName	|LastName	|Genre
+|:---   		|:------        |:-----         |:---
+aaronmitchell@yahoo.ca	|Aaron		|Mitchell	|Rock
+alero@uol.com.br	|Alexandre	|Rocha		|Rock
+astrid.gruber@apple.at	|Astrid		|Gruber		|Rock
+bjorn.hansen@yahoo.no	|Bjørn		|Hansen		|Rock
+camille.bernard@yahoo.fr|Camille	|Bernard	|Rock
+daan_peeters@apple.be	|Daan		|Peeters	|Rock
+diego.gutierrez@yahoo.ar|Diego		|Gutiérrez	|Rock
+dmiller@comcast.com	|Dan		|Miller		|Rock
+dominiquelefebvre@gmail.com |Dominique	|Lefebvre	|Rock
+edfrancis@yachoo.ca	|Edward		|Francis	|Rock
+
+### Insight:  
+- We found out that all the 59 customers in the database have listened to Rock Music
+#
+
+### 4. Who is writing the rock music?
+
+### Solution:
+- Select the Artist's name and count the number of rock music they have written.
+
 ```sql
 SELECT Ar.Name As Artist, COUNT(G.name) AS Total_rock
 FROM Artist Ar
@@ -84,28 +109,53 @@ GROUP BY 1
 ORDER BY 2 DESC
 LIMIT 10;
 ```
+### Output: 
+|Artist		|Total_rock
+|:---           |-----:
+Led Zeppelin	|114
+U2		|112
+Deep Purple	|92
+Iron Maiden	|81
+Pearl Jam	|54
+Van Halen	|52
+Queen		|45
+The Rolling Stones|41
+Creedence Clearwater Revival	|40
+Kiss		|35
 
-## 5.	Which artist has earned the most according to the Invoice Lines? Use this artist to find which customer spent the most on this artist.
+### Insights:
+- Led Zeppelin tops the list of Artists who have written the most Rock Music with 114 songs followed Closely by U2 with 112 music.
+#
+
+### 5.	Which artist has earned the most according to the Invoice Lines? Use this artist to find which customer spent the most on this artist.
 
 ### a.	Artist that has earned the most.
 ```sql
-SELECT Ar.Name As Artist, 
-		ROUND(SUM(T.UnitPrice *Il.Quantity),2) AS Total_earned
-FROM Artist Ar
-JOIN Album Al
+SELECT 	Ar.Name As Artist, 
+	ROUND(SUM(T.UnitPrice *Il.Quantity),2) AS Total_earned
+FROM Artist AS Ar
+JOIN Album AS Al
 ON Al.ArtistId = Ar.ArtistId
-JOIN Track T
+INNER JOIN Track AS T
 ON T.AlbumId = Al.AlbumId
-JOIN InvoiceLine Il
+INNER JOIN InvoiceLine AS Il
 ON Il.TrackId = T.TrackId
-JOIN Invoice I 
+INNER JOIN Invoice AS I 
 ON I.InvoiceId = Il.InvoiceId
-JOIN Customer C
+INNER JOIN Customer AS C
 ON C.CustomerId = I.CustomerId
 GROUP BY 1
 ORDER BY 2 DESC
 LIMIT 5;
 ```
+### Output:
+Artist	Total_earned
+Iron Maiden	138.6
+U2	105.93
+Metallica	90.09
+Led Zeppelin	86.13
+Lost	81.59
+
 ### b.	Customer who spent most on Iron Maiden
 ```sql
 WITH sub AS(
