@@ -38,4 +38,4 @@ The database can be gotten from [here](Chinook.db)
 
 ## Medium Article
 
-[Medium]()
+[Medium](https://medium.com/@raufrukayat/chinook-database-querying-a-digital-music-store-database-8c98cf0f8611)
