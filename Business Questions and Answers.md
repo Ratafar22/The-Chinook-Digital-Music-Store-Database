@@ -15,15 +15,18 @@ ORDER BY 1 DESC;
 ### Output
 
 | Employee	 |Total_Customer |
-| :--------       |-----------: 	
+| :--------      |-----------: 	
 | Peacock Jane	 |21
 | Park Margaret	 |20
 | Johnson Steve	 |18
 
+### Insight:
+There are three Sales support Reps managing the customers with Peacock Jane having the highest customers of 21 and Johnson Steve with 18 total customers.
+
 ## 2. Who are our top Customers according to Invoices?
 ```sql  
-SELECT C.FirstName || ' ' || C.LastName AS Customer_Name, 
-		SUM(I.Total) AS Total_spent
+SELECT 	C.FirstName || ' ' || C.LastName AS Customer_Name, 
+	SUM(I.Total) AS Total_spent
 FROM Invoice AS I
 INNER JOIN Customer  AS C
 ON C.CustomerId = I.CustomerId
