@@ -25,7 +25,7 @@ The database can be gotten from [here](Chinook.db)
 ## Skills and Concepts demonstrated
 - SubQueries
 - CTEs
-- Aggregation and JOIN
+- Aggregations and JOINs
 - Data Visualization
   
 ## Business Questions And Answers
