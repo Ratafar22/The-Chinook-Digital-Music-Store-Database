@@ -1,6 +1,7 @@
-## 1. Which Employee has the Highest total number of Customers?
+### 1. Which Employee has the Highest total number of Customers?
 
 ### Solution:
+
 - CONCATENATE the last name and first name of the Employees.
 - COUNT the customer ID to get the total number of customers.
   
@@ -23,7 +24,13 @@ ORDER BY 1 DESC;
 ### Insight:
 - There are three Sales support Reps managing the customers with Peacock Jane having the highest customers of 21 and Johnson Steve with 18 total customers.
 
-## 2. Who are our top Customers according to Invoices?
+#
+
+### 2. Who are our top Customers according to Invoices?
+
+### Solution:
+- Select the first and last names of the customers and calculate the total Sum of their invoices.
+  
 ```sql  
 SELECT 	C.FirstName || ' ' || C.LastName AS Customer_Name, 
 	SUM(I.Total) AS Total_spent
@@ -34,6 +41,18 @@ GROUP BY 1
 ORDER BY 2 DESC
 LIMIT 5;
 ```
+### Output
+Customer_Name	|Total_spent
+|:---           |-----:
+Helena Holý	|49.62
+Richard Cunningham |47.62
+Luis Rojas	|46.62
+Ladislav Kovács	|45.62
+Hugh O'Reilly	|45.62
+
+### Insight: 
+- Helena Holy, Richard Cunningham, Luis Rojas, Ladislav Kovacs, and Hugh O’Reilly are the top five customers who have spent the highest amount of money according to the invoice.
+
 ## 3. Who are the Rock Music Listeners? We want to know all Rock Music listeners' email, first names, last names, and Genres
 ```sql
 SELECT C.Email, C.FirstName, C.LastName, G.Name AS Genre
