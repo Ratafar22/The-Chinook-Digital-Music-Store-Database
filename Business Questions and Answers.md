@@ -1,5 +1,9 @@
 ## 1. Which Employee has the Highest total number of Customers?
 
+### Solution:
+- CONCATENATE the last name and first name of the Employees.
+- COUNT the customer ID to get the total number of customers.
+  
 ```sql
 SELECT e.LastName || ' ' || e.FirstName AS Employee, COUNT(c.customerid) AS Total_Customer
 FROM Employee e
@@ -8,6 +12,13 @@ ON e.EmployeeId = c.SupportRepId
 GROUP BY 1
 ORDER BY 1 DESC;
 ```
+### Output
+
+| Employee	 |Total_Customer |
+| :--------       |-----------: 	
+| Peacock Jane	 |21
+| Park Margaret	 |20
+| Johnson Steve	 |18
 
 ## 2. Who are our top Customers according to Invoices?
 ```sql  
