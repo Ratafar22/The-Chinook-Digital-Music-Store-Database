@@ -7,8 +7,8 @@
   
 ```sql
 SELECT e.LastName || ' ' || e.FirstName AS Employee, COUNT(c.customerid) AS Total_Customer
-FROM Employee e
-INNER JOIN Customer c
+FROM Employee AS e
+INNER JOIN Customer AS c
 ON e.EmployeeId = c.SupportRepId
 GROUP BY 1
 ORDER BY 1 DESC;
@@ -60,13 +60,13 @@ Hugh O'Reilly	|45.62
 ```sql
 SELECT C.Email, C.FirstName, C.LastName, G.Name AS Genre
 FROM Customer C
-INNER JOIN Invoice I
+INNER JOIN Invoice AS I
 ON I.CustomerId = C.CustomerId
-INNER JOIN InvoiceLine Il
+INNER JOIN InvoiceLine AS Il
 ON Il.InvoiceId = I.InvoiceId
-INNER JOIN Track T
+INNER JOIN Track AS T
 ON T.TrackId = Il.TrackId
-INNER JOIN Genre G
+INNER JOIN Genre AS G
 ON G.GenreId = T.GenreId
 WHERE Genre = 'Rock'
 GROUP BY 1,2,3,4
@@ -97,12 +97,12 @@ edfrancis@yachoo.ca	|Edward		|Francis	|Rock
 
 ```sql
 SELECT Ar.Name As Artist, COUNT(G.name) AS Total_rock
-FROM Artist Ar
-INNER JOIN Album Al
+FROM Artist AS Ar
+INNER JOIN Album AS Al
 ON Al.ArtistId = Ar.ArtistId
-INNER JOIN Track T
+INNER JOIN Track AS T
 ON T.AlbumId = Al.AlbumId
-INNER JOIN Genre G
+INNER JOIN Genre AS G
 ON G.GenreId = T.GenreId
 WHERE G.Name = 'Rock'
 GROUP BY 1
@@ -149,12 +149,13 @@ ORDER BY 2 DESC
 LIMIT 5;
 ```
 ### Output:
-Artist	Total_earned
-Iron Maiden	138.6
-U2	105.93
-Metallica	90.09
-Led Zeppelin	86.13
-Lost	81.59
+|Artist		|Total_earned
+|:---           |----:
+Iron Maiden	|138.6
+U2		|105.93
+Metallica	|90.09
+Led Zeppelin	|86.13
+Lost	|	81.59
 
 ### b.	Customer who spent most on Iron Maiden
 ```sql
@@ -164,16 +165,16 @@ WITH sub AS(
 			C.FirstName AS First_Name,
 			C.LastName AS Last_Name,
 			T.UnitPrice* Il.Quantity AS Amount_spent
-		FROM Artist Ar
-		JOIN Album Al
+		FROM Artist AS Ar
+		INNER JOIN Album AS Al
 		ON Al.ArtistId = Ar.ArtistId
-		JOIN Track T
+		INNER JOIN Track AS T
 		ON T.AlbumId = Al.AlbumId
-		JOIN InvoiceLine Il
-		ON Il.TrackId = T.TrackId
-		JOIN Invoice I 
+		INNER JOIN InvoiceLine AS Il
+		INNER ON Il.TrackId = T.TrackId
+		INNER JOIN Invoice AS I 
 		ON I.InvoiceId = Il.InvoiceId
-		JOIN Customer C
+		INNER JOIN Customer AS C
 		ON C.CustomerId = I.CustomerId
 		ORDER BY 5 DESC)
 SELECT  Artist,
@@ -185,16 +186,16 @@ FROM sub
 WHERE Artist =  (SELECT Artist
 				FROM(SELECT 	Ar.Name As Artist, 
 						ROUND(SUM(T.UnitPrice *Il.Quantity),2) AS Total_earned
-					FROM Artist Ar
-					JOIN Album Al
+					FROM Artist AS Ar
+					INNER JOIN Album AS Al
 					ON Al.ArtistId = Ar.ArtistId
-					JOIN Track T
+					INNER JOIN Track AS T
 					ON T.AlbumId = Al.AlbumId
-					JOIN InvoiceLine Il
+					INNER JOIN InvoiceLine AS Il
 					ON Il.TrackId = T.TrackId
-					JOIN Invoice I 
+					INNER JOIN Invoice AS I 
 					ON I.InvoiceId = Il.InvoiceId
-					JOIN Customer C
+					INNER JOIN Customer AS C
 					ON C.CustomerId = I.CustomerId
 					GROUP BY 1
 					ORDER BY 2 DESC
