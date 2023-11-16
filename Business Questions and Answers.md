@@ -146,8 +146,6 @@ INNER JOIN InvoiceLine AS Il
 ON Il.TrackId = T.TrackId
 INNER JOIN Invoice AS I 
 ON I.InvoiceId = Il.InvoiceId
-INNER JOIN Customer AS C
-ON C.CustomerId = I.CustomerId
 GROUP BY 1
 ORDER BY 2 DESC
 LIMIT 5;
@@ -206,8 +204,6 @@ WHERE Artist =  (SELECT Artist
 			ON Il.TrackId = T.TrackId
 			INNER JOIN Invoice AS I 
 			ON I.InvoiceId = Il.InvoiceId
-			INNER JOIN Customer AS C
-			ON C.CustomerId = I.CustomerId
 			GROUP BY 1
 			ORDER BY 2 DESC
 			LIMIT 1) t1)
