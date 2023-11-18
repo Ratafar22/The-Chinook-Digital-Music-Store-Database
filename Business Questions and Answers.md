@@ -87,7 +87,7 @@ dominiquelefebvre@gmail.com |Dominique	|Lefebvre	|Rock
 edfrancis@yachoo.ca	|Edward		|Francis	|Rock
 
 ### Insight:  
-- We found out that all the 59 customers in the database have listened to Rock Music
+- We found out that all the 59 customers in the database have listened to Rock Music.
 #
 
 ### 4. Who is writing the rock music?
@@ -119,9 +119,9 @@ Iron Maiden	|81
 Pearl Jam	|54
 Van Halen	|52
 Queen		|45
-The Rolling Stones|41
+The Rolling Stones	|41
 Creedence Clearwater Revival	|40
-Kiss		|35
+Kiss		|		35
 
 ### Insights:
 - Led Zeppelin tops the list of Artists who have written the most Rock Music with 114 songs followed Closely by U2 with 112 music.
